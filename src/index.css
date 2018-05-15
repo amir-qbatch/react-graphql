@@ -1,0 +1,29 @@
+@import '~antd/dist/antd.css';
+
+.App {
+  text-align: center;
+}
+#components-layout-demo-custom-trigger .logo {
+  height: 32px;
+  background: rgba(255,255,255,.2);
+  margin: 16px;
+}
+.header-collapse {
+  font-size: 18px;
+  line-height: 64px;
+  padding: 0 24px;
+  cursor: pointer;
+  transition: color .3s;
+}
+.header-collapse:hover {
+  color: #1890ff;
+}
+.sider-logo {
+  height: 32px;
+  background: rgba(255,255,255,.2);
+  margin: 16px;
+}
+.content-container {
+  padding: 0 50px;
+  margin-top: 28px;
+}

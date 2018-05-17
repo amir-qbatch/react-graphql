@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import { Mutation } from 'react-apollo';
 import Button from '../components/Button';
 import InputField from '../components/Fields';
-import { onError } from "apollo-link-error";
 import * as Cookies from "js-cookie";
 
 import USER_REGISTER from '../graphql/mutations/user/register';
@@ -18,11 +16,17 @@ class Register extends Component {
     }
   }
 
-  handleClick = async (registerUser) => {
-    const user = await registerUser({variables: this.state});
+  handleClick = async () => {
+    const { client } = this.props;
+    const response = await client.mutate({
+      mutation: USER_REGISTER,
+      variables: this.state
+    });
+    console.log(response);
+    const { registerUser } = response.data;
 
-    if(user && user.data.registerUser.status) {
-      Cookies.set('token', user.data.registerUser.user.token, { expires: 7 });
+    if(registerUser && registerUser.status) {
+      Cookies.set('token', registerUser.user.token, { expires: 7 });
       this.props.history.push('/login');
     }
   }
@@ -32,19 +36,13 @@ class Register extends Component {
   }
 
   render() {
-    return(
-      <Mutation mutation={USER_REGISTER} errorPolicy="all" onError={(({ graphQLErrors, networkError }) => { console.log(networkError.message) })}>
-        {(registerUser, {User}) => {
-          return(
-            <div>
-              <InputField type='text' handleChange={this.handleChange} name='userName'/>
-              <InputField type='text' handleChange={this.handleChange} name='email' />
-              <InputField type='password' handleChange={this.handleChange} name='password' />
-              <Button type='primary' name='Register' handleClick={this.handleClick} registerUser={registerUser}/>
-            </div>
-          )
-        }}
-      </Mutation>
+    return (
+      <div>
+        <InputField type='text' handleChange={this.handleChange} name='userName'/>
+        <InputField type='text' handleChange={this.handleChange} name='email' />
+        <InputField type='password' handleChange={this.handleChange} name='password' />
+        <Button type='primary' name='Register' handleClick={this.handleClick} />
+      </div>
     )
   }
 }

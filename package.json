@@ -20,7 +20,7 @@
   "scripts": {
     "testing": "nodemon src/index.js --exec babel-node",
     "dev": "react-scripts start",
-    "start": "webpack-dev-server --output-public-path=dist/bundle.js",
+    "start": "webpack-dev-server --history-api-fallback --inline --progress --port 7800",
     "build": "webpack --mode production"
   },
   "devDependencies": {

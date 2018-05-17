@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import { Mutation } from 'react-apollo';
 import { Button } from 'antd';
 import './home/home.css';
 
-import AddBook from "../graphql/mutations/book/books";
+import AddBook from "../graphql/mutations/book/addBooks";
 
 export default class Book extends Component {
   constructor(props) {
@@ -17,40 +16,45 @@ export default class Book extends Component {
     }
   }
 
-  handleClick = async (AddBook) => {
+  handleClick = async () => {
+    const { client } = this.props;
+
     const testingBook = {
-      title: "new book",
+      title: "new dummy book",
       author: "qbatch"
     }
-    const data = await AddBook({ variables: testingBook });
-    if(data) {
-      this.setState({book: data.data.addBook});
+    const response = await client.mutate({
+      mutation: AddBook,
+      variables: testingBook
+    })
+    const { addBook } = response.data;
+
+    if(addBook) {
+      this.setState({book: addBook});
     }
   }
 
   render() {  
+
     const { title, author } = this.state.book;
+    
     return (
-      <Mutation mutation={AddBook}> 
-      {(AddBook, { data }) => (
-        <div className="home-container">
-          <div className="content"> 
-            <Button 
-              type="primary"
-              onClick={() => this.handleClick(AddBook)}
-            >
-              Add Book
-            </Button>
-            <h1>
-              {title && title}
-            </h1>
-            <h1>
-              {author && author}
-            </h1>
-          </div>
+      <div className="home-container">
+        <div className="content"> 
+          <Button 
+            type="primary"
+            onClick={() => this.handleClick()}
+          >
+            Add Book
+          </Button>
+          <h4>
+            {title && title}
+          </h4>
+          <h4>
+            {author && author}
+          </h4>
         </div>
-      )}
-      </Mutation>
+      </div>
     )
   }
 }

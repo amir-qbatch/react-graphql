@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Form, Icon, Input, Button, Checkbox } from 'antd';
+import { Form, Button } from 'antd';
 import { Mutation } from 'react-apollo';
 import { NavLink } from 'react-router-dom';
 import * as Cookies from "js-cookie";
@@ -40,8 +40,8 @@ class Login extends Component {
         {(userLogin, {User}) => {
           return(
             <div>
-              <InputField handleChange={this.handleChange} name='Email' type='text' />
-              <InputField handleChange={this.handleChange} name='Password' type='password' />
+              <InputField handleChange={this.handleChange} name='email' type='text' />
+              <InputField handleChange={this.handleChange} name='password' type='password' />
               <LoginButton
                 FormItem={FormItem} 
                 handleSubmit={this.handleSubmit} 

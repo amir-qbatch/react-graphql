@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
-import { Form, Icon, Input, Button, Checkbox } from 'antd';
+import React from 'react'
+import { Form, Button } from 'antd';
 const FormItem = Form.Item;
 
 const RegisterButton = ({type, name, handleClick, registerUser}) => {

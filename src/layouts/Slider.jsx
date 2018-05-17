@@ -6,10 +6,6 @@ import { NavLink } from 'react-router-dom';
 import './slider/sider.css';
 
 export default class SideBar extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     const { Sider } = Layout;
 

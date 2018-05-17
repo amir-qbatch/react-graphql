@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
-
 import App from '../layouts/App.jsx';
-const user = {
-  name: 'amir'
-}
+import AppHOC from '../hoc/AppHOC';
 
-export default class AppContainer extends Component {
+class AppContainer extends Component {
   render() {
     return (
-      user
+      <App {...this.props}/>
     )
   }
-}(App);
+};
+
+export default AppHOC(AppContainer);

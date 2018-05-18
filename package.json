@@ -17,8 +17,6 @@
     "react-scripts": "1.1.4"
   },
   "scripts": {
-    "testing": "nodemon src/index.js --exec babel-node",
-    "dev": "react-scripts start",
     "start": "webpack-dev-server --mode development --open",
     "build": "webpack --mode production"
   },

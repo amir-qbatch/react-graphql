@@ -1,8 +1,8 @@
 import gql from "graphql-tag";
 
 const getUsers = gql`
-  query {
-    getUsers {
+  query getUsers($first: ID!, $offset: ID!) {
+    getUsers(first: $first, offset: $offset) {
       name
       age
       userName

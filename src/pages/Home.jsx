@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
+import { Pagination } from 'antd';
 import './home/home.css';
 
 export default class Home extends Component {
-  render() {
 
-    const { users } = this.props;
-    
+  render() {
+    const { users, onChange, total } = this.props;
+
     return (
       <div className="home-container">
         <div className="content">
@@ -17,6 +18,9 @@ export default class Home extends Component {
           ))
         }
         </div>
+        <div className="pagination">
+          <Pagination onChange={onChange} defaultCurrent={1} total={parseInt(total)} />
+        </div> 
       </div>
     )
   };

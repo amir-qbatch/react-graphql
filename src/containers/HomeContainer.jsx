@@ -11,11 +11,12 @@ class HomeContainer extends Component {
   }
 
   async componentDidMount() {
+    console.log('called');
     const { client } = this.props;
     const response = await client.query({
       query: getUsers
     })
-
+    console.log(response, 'response latest');
     if(response) {
       this.setState({users: 
         response.data.getUsers ? 

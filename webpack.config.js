@@ -1,10 +1,11 @@
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
+const HtmlWebPackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+require('babel-polyfill');
 
 module.exports = {
-  entry: './src/index.jsx',
+  entry: ['babel-polyfill', './src/index.js'],
   output: {
-    filename: './bundle.js'
+    filename: './bundl e.js'
   },
 
   module: {
@@ -20,24 +21,6 @@ module.exports = {
           }
         }
       },
-      {
-        test: /\.css$/,
-        use: [
-          {
-            loader: "style-loader"
-          },
-          {
-            loader: "css-loader",
-            options: {
-              modules: true,
-              importLoaders: 1,
-              localIdentName: "[name]_[local]_[hash:base64]",
-              sourceMap: true,
-              minimize: true
-            }
-          }
-        ]
-      },
       { 
         test: /\.jsx?$/, 
         resolve: { 
@@ -46,6 +29,10 @@ module.exports = {
         use: {
           loader: "babel-loader"
         }
+      },
+      {
+        test: /\.css$/,
+        use: [MiniCssExtractPlugin.loader, "css-loader"]
       },
       {
         test: /\.less$/,
@@ -57,8 +44,27 @@ module.exports = {
           loader: 'less-loader', options: {
           }
         }]
+      },
+      {
+        test: /\.html$/,
+        use: [
+          {
+            loader: "html-loader",
+            options: { minimize: true }
+          }
+        ]
       }
     ]
   },
+  plugins: [
+    new HtmlWebPackPlugin({
+      template: "./public/index.html",
+      filename: "./index.html"
+    }),
+    new MiniCssExtractPlugin({
+      filename: "[name].css",
+      chunkFilename: "[id].css"
+    })
+  ]
   // plugins: [htmlWebpackPlugin]
 };

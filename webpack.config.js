@@ -5,7 +5,7 @@ require('babel-polyfill');
 module.exports = {
   entry: ['babel-polyfill', './src/index.js'],
   output: {
-    filename: './bundl e.js'
+    filename: './bundle.js'
   },
 
   module: {
